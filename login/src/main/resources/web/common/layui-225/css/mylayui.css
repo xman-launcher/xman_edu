@@ -1,0 +1,26 @@
+.main {
+     margin:50px auto;
+     text-align: center;
+ }
+.layui-laypage-mytheme{
+    background: #fff;
+    font-size: 18px;
+    color:#f33131;
+}
+.layui-laypage-mypage a,.layui-laypage-mypage span{
+    border-width:0;
+}
+.myskip{
+    width:50px;background: #ffffff;border-radius:5px;border:1px solid #01AAED;
+}
+.layui-table-cell{
+    height: 28px;
+    line-height: 28px;
+    padding: 0 15px;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
+    text-align: center;
+}

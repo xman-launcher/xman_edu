@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>登录界面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Language" content="zh-CN"/>
+    <meta http-equiv="Content-Script-Type" content="text/javascript"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="description" content="dream room" />
+    <meta name="keywords" content="dream room,教育" />
+    <link rel="stylesheet" type="text/css" href="./common/layui-225/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="./common/css/login.css"/>
+    <script type="text/javascript" src="./common/layui-225/layui.js"></script>
+
+</head>
+<body>
+<div class="e1000_register_content">
+    <h2 class="title">从这里，追赶世界</h2>
+    <h3 class="subtitle">开启你的逐梦之路</h3>
+    <div class="e1000_register_form">
+        <div class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">昵称：</label>
+                <div class="layui-input-inline">
+                    <input type="" name="nickname" required lay-verify="nickname" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码：</label>
+                <div class="layui-input-inline">
+                    <input type="password" name="password" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux"></div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">登录</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+
+<script>
+    layui.use(['form','jquery','layer'], function(){
+        var form = layui.form;
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            var param = data.field;
+            var paramObj = {
+                dto:{
+                    eduName : param.nickname,
+                    eduPassWord:param.password
+                }
+            }
+            ajaxReturnCommon("http://127.0.0.1:8002/edu/login/goLogin",paramObj,'POST',true,function(data){
+                if(data){
+                    if(data.errMsg){
+                        layer.msg(data.errMsg)
+                        return;
+                    }
+                    if(data.result != "0" || !data.list || data.list.length==0){
+                        layer.msg("登录失败！请重新登录！")
+                        return;
+                    }
+                    layer.msg("登录成功！欢迎"+data.list[0].eduName)
+                    return;
+                }
+                layer.msg("登录失败！请重新登录！")
+
+            })
+            return false;
+        });
+
+
+        function ajaxReturnCommon(url,param,reqMethod,isAsync,handle) {
+            var returnData;
+            $.ajax({
+                url: url,
+                async: isAsync,
+                dataType: 'json',
+                contentType:"application/json",
+                data: JSON.stringify(param),
+                type: reqMethod ? reqMethod :'POST',
+                success: function (data) {
+                    if(!isAsync){
+                        returnData = data;
+                    }else{
+                        handle && handle(data);
+                    }
+                },
+                error: function () {
+                    if(isAsync){
+                        handle && handle({errMsg:"ajax调用出错！"});
+                    }
+                }
+            })
+            if(!isAsync){
+                return returnData;
+            }
+        }
+
+    });
+</script>
+</html>

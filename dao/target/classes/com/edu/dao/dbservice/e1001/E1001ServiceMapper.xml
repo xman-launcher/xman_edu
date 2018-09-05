@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.dao.dbservice.e1001.E1001ServiceMapper">
+
+    <insert id="insert" parameterType="e1001.E100101InDto">
+        insert into edu_user_info(
+        eduUsrName,
+        eduPhone,
+        eduAddress,
+        eduSex,
+        eduName,
+        eduPassWord
+        )
+        values
+        (
+        #{eduUsrName,jdbcType=VARCHAR},
+        #{eduPhone,jdbcType=VARCHAR},
+        #{eduAddress,jdbcType=VARCHAR},
+        #{eduSex,jdbcType=INTEGER},
+        #{eduName,jdbcType=VARCHAR},
+        #{eduPassWord,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <select id="selectByUsrName" parameterType="e1001.E100102InDto" resultType="e1001.E100102Dto">
+        select
+        id,
+        eduUsrName,
+        eduPhone,
+        eduAddress,
+        eduSex,
+        eduName
+        from edu_user_info where eduName=#{eduName}
+    </select>
+
+    <select id="selectByUsrNameAndPass" parameterType="e1001.E100103InDto" resultType="e1001.E100103Dto">
+        select
+        id,
+        eduUsrName,
+        eduPhone,
+        eduAddress,
+        eduSex,
+        eduName
+        from edu_user_info where eduName=#{eduName} AND eduPassWord=#{eduPassWord}
+    </select>
+
+</mapper>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title></title>
+</head>
+<body>
+    <span>昵称</span>:<input id="name" value=""><br>
+    <span>电话</span>:<input id="phone" value=""><br>
+    <span>地址</span>:<input id="address" value=""><br>
+    <span>性别</span>:<input type="checkbox" id="man" value="男"><input type="checkbox" id="woman" value="女"><br>
+    <span>真实姓名</span>:<input id="realName" value=""><br>
+    <span>密码</span>:<input id="pass" value=""><br>
+    <span>确认密码</span>:<input id="passBt" value=""><br>
+    <input type="button" value="确认提交" id="submit">
+
+
+
+
+    <script type="text/javascript" src="./js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="./js/security.js"></script>
+    <script>
+        var publickey={};
+        $("#submit").on("click",function(){
+            if($("#pass").val()!=$("#passBt").val()){
+                alert("两次密码不一致");
+                return;
+            }
+            var param = {
+                eduName:$("#name").val(),
+                eduPhone:$("#phone").val(),
+                eduAddress:$("#address").val(),
+                eduSex:$("#man").is(':checked') ? 1 : 2,
+                eduUsrName:$("#realName").val(),
+                eduPassWord:$("#pass").val()
+            }
+            var data = {
+                dto:param,
+                url:"",
+                functionId:"e100101"
+            }
+            $.ajax({
+                url: "http://127.0.0.1:8080/api/edu/e100101",
+                async: false,
+                dataType: 'json',
+                contentType:"application/json",
+                data: JSON.stringify(data),
+                type: 'POST',
+                success: function (data) {
+                    alert(data);
+                },
+                error: function () {
+
+                }
+            })
+
+//            RSAUtils.setMaxDigits(200);
+//            var key = RSAUtils.getKeyPair(publickey.publicKeyModulus, "", publickey.publicKeyExponent);
+//            var encrypedPwd = RSAUtils.encryptedString(key,"wangxun".split("").reverse().join(""));
+//
+//            $.ajax({url: "http://127.0.0.1:8080/api/edu/endPass",
+//                async: false,
+//                dataType: 'json',
+//                contentType:"application/json",
+//                data: JSON.stringify({"pass":encrypedPwd}),
+//                type: 'POST',
+//                success: function (data) {
+//
+//                },
+//                error: function () {
+//
+//                }
+//            })
+
+        })
+
+//        $.ajax({url: "http://127.0.0.1:8080/api/edu/pass",
+//                        async: false,
+//                        dataType: 'json',
+//                        contentType:"application/json",
+//                        data: "",
+//                        type: 'POST',
+//                        success: function (data) {
+//                            console.log(data.publicKeyExponent+"------"+data.publicKeyModulus);
+//                            publickey.publicKeyExponent = data.publicKeyExponent;
+//                            publickey.publicKeyModulus = data.publicKeyModulus;
+//                        },
+//                        error: function () {
+//
+//                        }
+//                    })
+
+
+
+    </script>
+</body>
+</html>

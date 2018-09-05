@@ -1,0 +1,57 @@
+.layui-layer-dialog {
+    min-width: 450px;
+    maring:auto 0px;
+}
+body .layer-ext-myskin .layui-layer-title{
+    padding: 0 80px 0 20px;
+    height: 55px;
+    line-height: 55px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    color: #fff;
+    overflow: hidden;
+    background-color: #5d5d5d;
+    border-radius: 2px 2px 0 0;
+}
+body .layer-ext-myskin .layui-layer-btn0{
+    border-color: #ec4444;
+    background-color: #f33131;
+    color: #fff;
+    height: 38px;
+    line-height: 38px;
+    width: 60px;
+    text-align: center;
+}
+
+body .layer-ext-myskin .layui-layer-btn1{
+    border-color: #ec4444;
+    background-color: #f33131;
+    color: #fff;
+    height: 38px;
+    line-height: 38px;
+    width: 60px;
+    text-align: center;
+}
+
+.myCustomerTip {
+    font-size: 16px;
+    color: #666;
+    line-height: 24px;
+    width: 300px;
+    margin: auto;
+    padding-top: 10px;
+}
+.myCustomer {
+    font-size: 16px;
+    color: #666;
+    line-height: 24px;
+    width: 350px;
+    margin: auto;
+}
+.layui-tree-skin-mytest .layui-tree-branch{
+    color: #EDCA50;
+    /*color:#F7B824;*/
+    /*background-image:url(../../../../img/1.png);*/
+}
+
+
